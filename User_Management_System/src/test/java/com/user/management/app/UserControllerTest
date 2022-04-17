@@ -12,3 +12,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserControllerTest{
+
+@Autowired
+	private MockMvc mockMvc;
+
+@Autowired
+  private UserService userService;
+
+@Test
+public void retreiveDetailsOfUser() throws Exception{
+    Mockito.when(userService.getUserById()).thenReturn(Mock UserName);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/showFormForUpdate/{id}").accept(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        System.out.println(result.getResponse());
+        String expected = "{id:John,age:24,job:se}";
+        JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(),false);
+	}
+
